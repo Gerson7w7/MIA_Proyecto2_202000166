@@ -1,0 +1,25 @@
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+.logo-prin {
+  width: 80px;
+  height: 80px;
+  margin-left: 10px;
+}
+.titulo {
+  margin-top: 5px;
+  margin-right: 25px;
+}
+.logo-cont {
+  margin-top: 30px;
+  width: 200px;
+  height: 200px;
+}
+.logo-dash {
+  width: 150px;
+  height: 150px;
+  margin-left: 10px;
+}

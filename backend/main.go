@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -11,23 +10,23 @@ import (
 )
 
 type ComandoI struct {
-	Exp string `json:exp`
+	Exp string `json:"exp"`
 }
 
 type ContData struct {
-	Usuario string `json:usuario`
-	Clave   string `json:clave`
-	Id      string `json:id`
+	Usuario string `json:"usuario"`
+	Clave   string `json:"clave"`
+	Id      string `json:"id"`
 }
 
 type DatoRe struct {
-	Validate  bool   `json:validate`
-	Contenido string `json:contenido`
+	Validate  bool   `json:"validate"`
+	Contenido string `json:"contenido"`
 }
 type DatoRepIMG struct {
-	Validate  bool   `json:validate`
-	Contenido string `json:contenido`
-	Datob64   string `json:datob64`
+	Validate  bool   `json:"validate"`
+	Contenido string `json:"contenido"`
+	Datob64   string `json:"datob64"`
 }
 
 func AnalisisContenido(contenido string) {
@@ -53,14 +52,13 @@ func AnalisisContenido(contenido string) {
 }
 
 func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
+	// obtenemos info del front
 	var nweT ComandoI
-	var respuesta DatoRe
-	reqBoy, err := ioutil.ReadAll(r.Body)
-	if err != nil { //si hay errores
-		fmt.Fprintf(w, "inserte datos invalidos")
-	}
-	json.Unmarshal(reqBoy, &nweT)
+	json.NewDecoder(r.Body).Decode(&nweT)
 
+	var respuesta DatoRe
+	respuesta.Contenido ="hola"
+	respuesta.Validate = true
 	fmt.Println("Informacion: ", nweT.Exp)
 	AnalisisContenido(nweT.Exp)
 	//Aqui mando una respuesta al front
@@ -68,20 +66,17 @@ func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
 	respuesta.Contenido = cadenaf
 	cadenaf = ""
 
+	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
 	json.NewEncoder(w).Encode(respuesta)               
 }
 
 //para retornar la imagen base64:
 func analissisRepb64(w http.ResponseWriter, r *http.Request) {
+	// obtenemos info del front
 	var nweT ComandoI
+	json.NewDecoder(r.Body).Decode(&nweT)
 	var respuesta DatoRepIMG
-	reqBoy, err := ioutil.ReadAll(r.Body)
-	if err != nil { //si hay errores
-		fmt.Fprintf(w, "inserte datos invalidos")
-
-	}
-	json.Unmarshal(reqBoy, &nweT)
 
 	fmt.Println("Iformacion: ", nweT.Exp)
 	AnalisisContenido(nweT.Exp)
@@ -93,25 +88,23 @@ func analissisRepb64(w http.ResponseWriter, r *http.Request) {
 	imagenFinalRep = "" //limpio la variable
 	repVali = false     //aqui lo regreso a false
 
+	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
 	json.NewEncoder(w).Encode(respuesta)               
 }
 
 func valiLogin(w http.ResponseWriter, r *http.Request) {
+	// obtenemos info del front
 	var nweT ContData
+	json.NewDecoder(r.Body).Decode(&nweT)
+	
 	var respuesta DatoRe
-	reqBoy, err := ioutil.ReadAll(r.Body)
-	if err != nil { //si hay errores
-		fmt.Fprintf(w, "inserte datos invalidos")
-
-	}
-	json.Unmarshal(reqBoy, &nweT)
-
 	fmt.Println("Iformacion: ", nweT.Usuario)
 	fmt.Println("Iformacion: ", nweT.Clave)
 	fmt.Println("Iformacion: ", nweT.Id)
 	respuesta.Validate = valMontado(nweT.Id)
 	
+	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(respuesta) //solicito el dato agregado
 }
