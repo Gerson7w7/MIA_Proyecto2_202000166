@@ -18,8 +18,8 @@ func AnalizadorComando(comando string) {
 
 	//comprube si viene vacio el comando
 	if strings.Compare(comandosep[0], "\n") == 0 {
-		fmt.Println("Error-> Comando vacio")
-		cadenaf += "Error-> Comando vacio \n" // para retornar
+		fmt.Println("Salto de linea")
+		cadenaf += "Salto de linea \n" // para retornar
 	} else {
 		//simula un while
 		for (strings.Compare(comandosep[contador], "\n") != 0) && (strings.Compare(comandosep[contador], "golang\000") != 0) { // si no viene vacio -> \n
@@ -69,7 +69,7 @@ func AnalizadorComando(comando string) {
 		fmt.Println("		Pause.............")
 		cadenaf += "Se encontro el Pause:......... \n"
 	} else {
-		fmt.Println("Error-> Comando invalido o es un comentario")
-		cadenaf += "Error-> Comando invalido o es un comentario \n"
+		fmt.Println("Se encontro un comentario: " + string(comando) + "\n")
+		cadenaf += "Se encontro un comentario: " + string(comando) + "\n"
 	}
 }

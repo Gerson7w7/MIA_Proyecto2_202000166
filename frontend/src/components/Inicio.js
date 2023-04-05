@@ -1,9 +1,18 @@
 import BarraNav from "./BarraNav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Inicio = () => {
   const [fileContent, setFileContent] = useState("");
   const [salida, setSalida] = useState("");
+  const [logeado, setLogeado] = useState("");
+
+  useEffect(() => {
+    console.log("login: ", window.login);
+    console.log("user: ", window.user);
+    if (window.login) {
+      setLogeado(`Actualmente esta logueado como ${window.user}.`);
+    }
+  }, [logeado]);
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -20,7 +29,7 @@ const Inicio = () => {
   const analizador = (event) => {
     event.preventDefault();
     const url = `http://localhost:5000/comandos`;
-    const data = {exp: fileContent}
+    const data = { exp: fileContent };
     fetch(url, {
       method: "POST", // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
@@ -31,15 +40,17 @@ const Inicio = () => {
       .then((res) => res.json())
       .catch((error) => console.error("Error:", error))
       .then((res) => {
-        console.log(res.contenido)
-        setSalida(res.contenido)
+        console.log(res.contenido);
+        setSalida(res.contenido);
       });
   };
 
   return (
     <div className="main">
       <BarraNav name="Consola" />
-
+      <div className="d-flex justify-content-end">
+        <h6 className="text-info log">{logeado}</h6>
+      </div>
       <div className="d-flex justify-content-evenly">
         <form>
           <div className="form-group">

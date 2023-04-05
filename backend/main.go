@@ -57,8 +57,6 @@ func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&nweT)
 
 	var respuesta DatoRe
-	respuesta.Contenido ="hola"
-	respuesta.Validate = true
 	fmt.Println("Informacion: ", nweT.Exp)
 	AnalisisContenido(nweT.Exp)
 	//Aqui mando una respuesta al front
@@ -78,7 +76,7 @@ func analissisRepb64(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&nweT)
 	var respuesta DatoRepIMG
 
-	fmt.Println("Iformacion: ", nweT.Exp)
+	fmt.Println("Informacion: ", nweT.Exp)
 	AnalisisContenido(nweT.Exp)
 	//Aqui mando una respuesta al front
 	respuesta.Validate = repVali
@@ -99,9 +97,9 @@ func valiLogin(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&nweT)
 	
 	var respuesta DatoRe
-	fmt.Println("Iformacion: ", nweT.Usuario)
-	fmt.Println("Iformacion: ", nweT.Clave)
-	fmt.Println("Iformacion: ", nweT.Id)
+	fmt.Println("Informacion: ", nweT.Usuario)
+	fmt.Println("Informacion: ", nweT.Clave)
+	fmt.Println("Informacion: ", nweT.Id)
 	respuesta.Validate = valMontado(nweT.Id)
 	
 	// devolvemos la info al front

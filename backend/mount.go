@@ -287,7 +287,7 @@ func Montaje(name string, path string) {
 							for l := 0; l < 4; l++ {
 								if arraydisk[i].Part[l].start == 0 && arraydisk[i].Part[l].size == 0 { // esta vacio
 									//generador id
-									auxid := "28"
+									auxid := "66"
 									auxid += numeros[i]
 									auxid += abecedario[l]
 									fmt.Println("ID generador " + auxid)
@@ -313,7 +313,7 @@ func Montaje(name string, path string) {
 							for l := 0; l < 4; l++ {
 								if arraydisk[i].Part[l].start == 0 && arraydisk[i].Part[l].size == 0 {
 									//generador id
-									auxid := "28"
+									auxid := "66"
 									auxid += numeros[i]
 									auxid += abecedario[l]
 									fmt.Println("Id generador ext " + auxid)
@@ -341,7 +341,7 @@ func Montaje(name string, path string) {
 									//simula un while
 									for sig != -1 {
 										//se genera id
-										auxid := "28"
+										auxid := "66"
 										auxid += string(numeros[i])
 										auxid += string(abecedario[l])
 										//se asigna en la ram la particion
@@ -413,15 +413,15 @@ func MonstrarMount() {
 			for j := 0; j < 4; j++ {
 				if strings.Compare(arraydisk[i].Part[j].tipo, "p") == 0 { // es de tipo primaria
 					if strings.Compare(arraydisk[i].Part[j].mostrar, "S") == 0 {
-						fmt.Println(arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |   " + "#" + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo)
-						cadenaf += arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |   " + "#" + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo + " \n"
+						fmt.Println(arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |   " + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo)
+						cadenaf += arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |   " + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo + " \n"
 					}
 
 				} else if strings.Compare(arraydisk[i].Part[j].tipo, "e") == 0 { //es de tipo extendida
 					//se buscarn en las logicas
 					if strings.Compare(arraydisk[i].Part[j].mostrar, "S") == 0 {
-						fmt.Println(arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |    " + "#" + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo)
-						cadenaf += arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |    " + "#" + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo + " \n"
+						fmt.Println(arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |    " + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo)
+						cadenaf += arraydisk[i].Part[j].path + "    |   " + arraydisk[i].Part[j].name + "   |    " + arraydisk[i].Part[j].id + "   |   " + arraydisk[i].Part[j].tipo + " \n"
 					}
 				}
 			}
@@ -499,7 +499,7 @@ func AnalsisRep(comando string) {
 			cadenaf += "Encontro: " + lineacomandos + " \n"
 			lineacomandos = ""
 			contador++
-		} else if strings.Compare(lineacomandos, "-id=") == 0 {
+		} else if strings.Compare(lineacomandos, ">id=") == 0 {
 			fmt.Println("Encontro : " + lineacomandos)
 			cadenaf += "Encontro: " + lineacomandos + " \n"
 			lineacomandos = ""
@@ -517,7 +517,7 @@ func AnalsisRep(comando string) {
 			}
 			fmt.Println("Valor : " + valor_id)
 			cadenaf += "Valor: " + valor_id + " \n"
-		} else if strings.Compare(lineacomandos, "-path=") == 0 {
+		} else if strings.Compare(lineacomandos, ">path=") == 0 {
 			fmt.Println("Encontro : " + lineacomandos)
 			cadenaf += "Encontro: " + lineacomandos + " \n"
 			lineacomandos = ""
@@ -547,7 +547,7 @@ func AnalsisRep(comando string) {
 			}
 			fmt.Println("Valor : " + valor_path)
 			cadenaf += "Valor: " + valor_path + " \n"
-		} else if strings.Compare(lineacomandos, "-name=") == 0 {
+		} else if strings.Compare(lineacomandos, ">name=") == 0 {
 			fmt.Println("Encontro : " + lineacomandos)
 			cadenaf += "Encontro: " + lineacomandos + " \n"
 			lineacomandos = ""
