@@ -36,25 +36,21 @@ const Inicio = () => {
       .then((res) => res.json())
       .catch((error) => console.error("Error:", error))
       .then((res) => {
-        if (res.validate) {
-          if (!window.login) {
-            if (user === "root" && pwd === "123") {
-              setSalida(`Bienvenido ${user}! :D`);
-              window.user = user;
-              window.login = true;
-              setLogeado(`Actualmente esta logueado como ${window.user}.`);
-            } else {
-              setSalida(
-                "Usuario no encontrado, para crear usuarios primero ingrese como superusuario."
-              );
-            }
+        const user = res.name 
+        const pwd = res.pwd 
+        if (!window.login) {
+          if (user !== "" && pwd !== "") {
+            setSalida(`Bienvenido ${user}! :D`);
+            window.user = user;
+            window.login = true;
+            setLogeado(`Actualmente esta logueado como ${window.user}.`);
           } else {
-            setSalida('Error. Primero cierra la sesion actual.')
+            setSalida(
+              "Usuario no encontrado, para crear usuarios primero ingrese como superusuario."
+            );
           }
         } else {
-          setSalida(
-            `No se ha encontrado la particion montada :(. Intente otra vez.`
-          );
+          setSalida('Error. Primero cierra la sesion actual.')
         }
       });
   };

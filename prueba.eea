@@ -39,11 +39,6 @@ mount >path=/tmp/parte2/disco.dsk >name=Part3
 
 pause
 
-#REPORTE DISCO
-rep >id=661a >Path=/tmp/parte1/particiones/disco.jpg >name=disk
-
-pause
-
 # --- PARTE 2 ---
 
 #MKFS A PARTICIONES
@@ -51,10 +46,6 @@ mkfs >type=fast >id=661a
 
 pause
 
-#REPORTES INICIALES
-rep >id=661a >Path="/tmp/parte2/reportes/tree_1.pdf" >name=tree
-
-pause
 
 #INICIO DE SESION
 #Debe dar error porque no existe el usuario roca
@@ -79,9 +70,6 @@ rmgrp >name=Arqui
 
 pause
 
-#REPORTES FILE
-rep >id=661a >Path="/tmp/parte2/reportes/users_1.txt" >ruta="/users.txt" >name=file
-
 pause
 
 #CREACION DE USUARIOS
@@ -96,8 +84,6 @@ rmusr >user=user3
 
 pause
 
-#REPORTES FILE
-rep >id=661a >Path="/tmp/parte2/reportes/users_2.txt" >ruta="/users.txt" >name=file
 
 pause
 
@@ -110,9 +96,6 @@ Mkdir >path=/tmp/archivos/mia/carpeta2/a2
 Mkdir >path=/tmp/archivos/mia/carpeta2/a3
 
 pause
-
-#REPORTES TREE
-rep >id=661a >Path="/tmp/parte2/reportes/tree_2.pdf" >name=tree
 
 pause
 
@@ -129,23 +112,32 @@ mkfile >path="/tmp/d1.txt" >size=-25
 
 pause
 
-#REPORTES TREE
-rep >id=661a >Path="/tmp/parte2/reportes/tree_3.pdf" >name=tree
-
 pause
 
 mkfile >cont="/tmp/entrada.txt" >path="/tmp/bcont.txt"
 
 pause
 
-#REPORTES TREE
-rep >id=661a >Path="/tmp/parte2/reportes/tree_4.pdf" >name=tree
-
-#REPORTES FILE
-rep >id=661a >Path="/tmp/parte2/reportes/users_3.txt" >ruta="/tmp/entrada.txt" >name=file
-
 pause
 
 logout
 
 pause
+
+
+#REPORTES INICIALES
+rep >id=661a >Path="/tmp/parte2/reportes/tree_1.pdf" >name=tree
+#REPORTE DISCO
+rep >id=661a >Path=/tmp/parte1/particiones/disco.jpg >name=disk
+#REPORTES FILE
+rep >id=661a >Path="/tmp/parte2/reportes/users_1.txt" >ruta="/users.txt" >name=file
+#REPORTES FILE
+rep >id=661a >Path="/tmp/parte2/reportes/users_2.txt" >ruta="/users.txt" >name=file
+#REPORTES TREE
+rep >id=661a >Path="/tmp/parte2/reportes/tree_2.pdf" >name=tree
+#REPORTES TREE
+rep >id=661a >Path="/tmp/parte2/reportes/tree_3.pdf" >name=tree
+#REPORTES TREE
+rep >id=661a >Path="/tmp/parte2/reportes/tree_4.pdf" >name=tree
+#REPORTES FILE
+rep >id=661a >Path="/tmp/parte2/reportes/users_3.txt" >ruta="/tmp/entrada.txt" >name=file

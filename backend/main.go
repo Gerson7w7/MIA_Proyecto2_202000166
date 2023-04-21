@@ -12,13 +12,11 @@ import (
 type ComandoI struct {
 	Exp string `json:"exp"`
 }
-
 type ContData struct {
 	Usuario string `json:"usuario"`
 	Clave   string `json:"clave"`
 	Id      string `json:"id"`
 }
-
 type DatoRe struct {
 	Validate  bool   `json:"validate"`
 	Contenido string `json:"contenido"`
@@ -27,6 +25,11 @@ type DatoRepIMG struct {
 	Validate  bool   `json:"validate"`
 	Contenido string `json:"contenido"`
 	Datob64   string `json:"datob64"`
+}
+type User struct {
+	Name string `json:"name"`
+	Pwd  string `json:"pwd"`
+	Grp  string `json:"grp"`
 }
 
 func AnalisisContenido(contenido string) {
@@ -95,19 +98,27 @@ func valiLogin(w http.ResponseWriter, r *http.Request) {
 	// obtenemos info del front
 	var nweT ContData
 	json.NewDecoder(r.Body).Decode(&nweT)
-	
-	var respuesta DatoRe
 	fmt.Println("Informacion: ", nweT.Usuario)
 	fmt.Println("Informacion: ", nweT.Clave)
 	fmt.Println("Informacion: ", nweT.Id)
-	respuesta.Validate = valMontado(nweT.Id)
-	
+	var respuesta User
+	for e := Users.Front(); e != nil; e = e.Next() {
+		user := e.Value.(User)
+		if nweT.Usuario == user.Name && nweT.Clave == user.Pwd {
+			respuesta.Name = user.Name 
+			respuesta.Pwd = user.Pwd
+			respuesta.Grp = ""
+		}
+	}
 	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(respuesta) //solicito el dato agregado
 }
 
 func main() {
+	Users.PushFront(User{ Name: "root", Pwd: "123", Grp: "root" }) 
+	Groups.PushFront("root")
+
 	// creando el servidor y corriéndolo
 	mux := http.NewServeMux()
 

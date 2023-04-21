@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"container/list"
 )
 
 // variables globales
@@ -10,6 +11,8 @@ var cadenaf string = ""
 var imagenFinalRep string = ""
 var repVali = false
 var ReporteFInal = ""
+var Users = list.New()
+var Groups = list.New() 
 
 func AnalizadorComando(comando string) {
 	lineacomando := "" // donde se guarda el primer comando
@@ -68,6 +71,26 @@ func AnalizadorComando(comando string) {
 		//pause
 		fmt.Println("		Pause.............")
 		cadenaf += "Se encontro el Pause:......... \n"
+	} else if strings.Compare(lineacomando, "mkgrp") == 0 {
+		//mkgrp
+		fmt.Println("		Se encontro el mkgrp: ", comando)
+		cadenaf += "Se encontro el mkgrp:......... \n"
+		AnalisiMkgrp(comando)
+	} else if strings.Compare(lineacomando, "rmgrp") == 0 {
+		//rmgrp
+		fmt.Println("		Se encontro el rmgrp: ", comando)
+		cadenaf += "Se encontro el rmgrp:......... \n"
+		AnalisiRmgrp(comando)
+	} else if strings.Compare(lineacomando, "mkusr") == 0 {
+		//mkusr
+		fmt.Println("		Se encontro el mkusr: ", comando)
+		cadenaf += "Se encontro el mkusr:......... \n"
+		AnalisiMkusr(comando)
+	} else if strings.Compare(lineacomando, "rmusr") == 0 {
+		//rmuser
+		fmt.Println("		Se encontro el rmuser: ", comando)
+		cadenaf += "Se encontro el rmusr:......... \n"
+		AnalisiRmusr(comando)
 	} else {
 		fmt.Println("Se encontro un comentario: " + string(comando) + "\n")
 		cadenaf += "Se encontro un comentario: " + string(comando) + "\n"
