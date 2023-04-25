@@ -58,6 +58,7 @@ func AnalisisContenido(contenido string, canal chan<- bool) {
 }
 
 func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
+	canal := make(chan bool)
 	// obtenemos info del front
 	var nweT ComandoI
 	json.NewDecoder(r.Body).Decode(&nweT)
@@ -70,6 +71,7 @@ func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
 	respuesta.Contenido = cadenaf
 	cadenaf = ""
 
+	<-canal
 	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
 	json.NewEncoder(w).Encode(respuesta)               
