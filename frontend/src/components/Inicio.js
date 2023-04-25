@@ -6,6 +6,7 @@ const Inicio = () => {
   const [salida, setSalida] = useState("");
   const [logeado, setLogeado] = useState("");
   const host = "52.14.255.35";
+  // const host = "localhost";
 
   useEffect(() => {
     console.log("login: ", window.login);

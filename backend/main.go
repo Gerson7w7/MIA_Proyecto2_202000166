@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-
-	"github.com/rs/cors"
+	"log"
+	
+	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 )
 
 type ComandoI struct {
@@ -88,8 +90,6 @@ func analissisRepb64(w http.ResponseWriter, r *http.Request) {
 	cadenaf = ""
 	imagenFinalRep = "" //limpio la variable
 	repVali = false     //aqui lo regreso a false
-	fmt.Println("base64 1111111: ", imagenFinalRep)
-	fmt.Println("base64: ", respuesta.Datob64)
 
 	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
@@ -122,14 +122,16 @@ func main() {
 	Groups.PushFront("root")
 
 	// creando el servidor y corriéndolo
-	mux := http.NewServeMux()
+	router := mux.NewRouter()
+	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
+	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"})
+	origins := handlers.AllowedOrigins([]string{"*"})
 
 	// endpoints a utilizar
-	mux.HandleFunc("/login",valiLogin)
-	mux.HandleFunc("/comandos",AnalisisCadena)
-	mux.HandleFunc("/reportes",analissisRepb64)
+	router.HandleFunc("/login",valiLogin)
+	router.HandleFunc("/comandos",AnalisisCadena)
+	router.HandleFunc("/reportes",analissisRepb64)
 
-	handler := cors.Default().Handler(mux)
 	println("Server are running on port: 5000")
-	http.ListenAndServe(":5000", handler)
+	log.Fatal(http.ListenAndServe(":5000", handlers.CORS(headers, methods, origins)(router)))
 }
