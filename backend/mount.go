@@ -792,7 +792,7 @@ func generaReporte(f_name bool, f_id bool, f_path bool, _name string, _id string
 
 		fmt.Println("Segunda Grafica en ruta: ", nombref)
 		fmt.Println("Se enviara lo de base 64...")
-		convert64F("reporte"+auxdot+".jpg")
+		convert64F("./reporte"+auxdot+".jpg")
 		repVali = true
 
 	} else { // no existe el directorio
@@ -831,7 +831,7 @@ func generaReporte(f_name bool, f_id bool, f_path bool, _name string, _id string
 
 		fmt.Println("Segunda Grafica en ruta: ", nombref)
 		fmt.Println("Se enviara lo de base 64...")
-		convert64F("reporte"+auxdot+".jpg")
+		convert64F("./reporte"+auxdot+".jpg")
 		repVali = true
 	}
 }
@@ -981,7 +981,7 @@ func generarTree(f_name bool, f_id bool, f_path bool, _name string, _id string, 
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F("reporte"+auxdot+".jpg")
+			convert64F("./reporte"+auxdot+".jpg")
 			repVali = true
 
 		} else { // no existe el directorio
@@ -1020,7 +1020,7 @@ func generarTree(f_name bool, f_id bool, f_path bool, _name string, _id string, 
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F("reporte"+auxdot+".jpg")
+			convert64F("./reporte"+auxdot+".jpg")
 			repVali = true
 		}
 	} else {
@@ -1177,7 +1177,7 @@ func generarSB(f_name bool, f_id bool, f_path bool, _name string, _id string, _p
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F("reporte"+auxdot+".jpg")
+			convert64F("./reporte"+auxdot+".jpg")
 			repVali = true
 
 		} else { // no existe el directorio
@@ -1215,7 +1215,7 @@ func generarSB(f_name bool, f_id bool, f_path bool, _name string, _id string, _p
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F("reporte"+auxdot+".jpg")
+			convert64F("./reporte"+auxdot+".jpg")
 			repVali = true
 		}
 	} else {
@@ -1275,12 +1275,15 @@ func convert64F(rutaImage string) {
 
 	// crear una nueva base de búfer en el tamaño del archivo
 	fInfo, _ := imgFile.Stat()
+	fmt.Println("stat: ", fInfo)
 	var size int64 = fInfo.Size()
+	fmt.Println("size: ", size)
 	buf := make([]byte, size)
 
 	// leer el contenido del archivo en el búfer
 	fReader := bufio.NewReader(imgFile)
 	fReader.Read(buf)
+	fmt.Println("buf: ", buf)
 
 	// convierte los bytes del búfer a una cadena base64 - usa buf.Bytes() para la nueva imagen
 	imgBase64Str := base64.StdEncoding.EncodeToString(buf)
