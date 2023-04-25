@@ -31,7 +31,7 @@ const Inicio = () => {
   const analizador = (event) => {
     event.preventDefault();
     console.log("hola")
-    const url = `http://${host}:5000/comandos`;
+    const url = `http://${host}:80/comandos`;
     const data = { exp: fileContent };
     fetch(url, {
       method: "POST", // or 'PUT'
