@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strings"
 	"log"
-	"sync"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
