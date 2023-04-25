@@ -58,7 +58,7 @@ func AnalisisContenido(contenido string, canal chan<- bool) {
 }
 
 func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
-	canal := make(chan bool)
+	canal := make(chan bool, 1)
 	// obtenemos info del front
 	var nweT ComandoI
 	json.NewDecoder(r.Body).Decode(&nweT)
@@ -70,8 +70,8 @@ func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
 	respuesta.Validate = true
 	respuesta.Contenido = cadenaf
 	cadenaf = ""
-
-	<-canal
+	hol:= <-canal
+	fmt.Println("llegue: ", hol)
 	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
 	json.NewEncoder(w).Encode(respuesta)               
@@ -79,7 +79,7 @@ func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
 
 //para retornar la imagen base64:
 func analissisRepb64(w http.ResponseWriter, r *http.Request) {
-	canal := make(chan bool)
+	canal := make(chan bool, 1)
 	// obtenemos info del front
 	var nweT ComandoI
 	json.NewDecoder(r.Body).Decode(&nweT)
