@@ -94,7 +94,8 @@ func analissisRepb64(w http.ResponseWriter, r *http.Request) {
 	cadenaf = ""
 	imagenFinalRep = "" //limpio la variable
 	repVali = false     //aqui lo regreso a false
-	<-canal
+	hol:= <-canal
+	fmt.Println("llegue: ", hol)
 	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
 	json.NewEncoder(w).Encode(respuesta)               
