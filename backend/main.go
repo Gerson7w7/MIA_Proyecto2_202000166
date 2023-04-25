@@ -88,8 +88,8 @@ func analissisRepb64(w http.ResponseWriter, r *http.Request) {
 	cadenaf = ""
 	imagenFinalRep = "" //limpio la variable
 	repVali = false     //aqui lo regreso a false
-	fmt.println("base64 1111111: ", imagenFinalRep)
-	fmt.println("base64: ", respuesta.datob64)
+	fmt.Println("base64 1111111: ", imagenFinalRep)
+	fmt.Println("base64: ", respuesta.Datob64)
 
 	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
