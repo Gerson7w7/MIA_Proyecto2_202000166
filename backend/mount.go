@@ -1272,7 +1272,6 @@ func convert64F(rutaImage string) {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	defer imgFile.Close()
 
 	// crear una nueva base de búfer en el tamaño del archivo
 	fInfo, _ := imgFile.Stat()
@@ -1288,6 +1287,6 @@ func convert64F(rutaImage string) {
 	imagenFinalRep += "data:image/jpg;base64,"
 	imagenFinalRep += imgBase64Str
 	fmt.Println(imgBase64Str)
-
 	fmt.Println("hola soi: ", imagenFinalRep)
+	imgFile.Close()
 }
