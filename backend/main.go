@@ -6,7 +6,8 @@ import (
 	"net/http"
 	"strings"
 	"log"
-	
+	"sync"
+
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
@@ -34,7 +35,7 @@ type User struct {
 	Grp  string `json:"grp"`
 }
 
-func AnalisisContenido(contenido string) {
+func AnalisisContenido(contenido string, canal chan<- bool) {
 	lineacomando := "" // donde se guarda el primer comando
 	comandosep := strings.Split(contenido, "") 
 	fmt.Println("El tamaño total del arreglo creado", len(comandosep))
@@ -54,6 +55,7 @@ func AnalisisContenido(contenido string) {
 			lineacomando += (comandosep[i]) ///le cambie el tolower
 		}
 	}
+	canal <- true
 }
 
 func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
@@ -76,6 +78,7 @@ func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
 
 //para retornar la imagen base64:
 func analissisRepb64(w http.ResponseWriter, r *http.Request) {
+	canal := make(chan bool)
 	// obtenemos info del front
 	var nweT ComandoI
 	json.NewDecoder(r.Body).Decode(&nweT)
@@ -90,7 +93,7 @@ func analissisRepb64(w http.ResponseWriter, r *http.Request) {
 	cadenaf = ""
 	imagenFinalRep = "" //limpio la variable
 	repVali = false     //aqui lo regreso a false
-
+	<-canal
 	// devolvemos la info al front
 	w.Header().Set("Content-Type", "application/json") 
 	json.NewEncoder(w).Encode(respuesta)               
