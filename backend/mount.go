@@ -1278,8 +1278,8 @@ func convert64F(rutaImage string) {
 	fmt.Println("stat: ", fInfo)
 	var size int64 = fInfo.Size()
 	fmt.Println("size: ", size)
-	fmt.Println("size: ", imgFile.Stat().fInfo.Size())
-	buf := make([]byte, imgFile.Stat().fInfo.Size())
+	fmt.Println("size: ", imgFile.Stat().Size())
+	buf := make([]byte, imgFile.Stat().Size())
 
 	// leer el contenido del archivo en el búfer
 	fReader := bufio.NewReader(imgFile)
