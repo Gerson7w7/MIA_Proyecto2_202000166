@@ -792,7 +792,7 @@ func generaReporte(f_name bool, f_id bool, f_path bool, _name string, _id string
 
 		fmt.Println("Segunda Grafica en ruta: ", nombref)
 		fmt.Println("Se enviara lo de base 64...")
-		convert64F(nombref)
+		convert64F("reporte"+auxdot+".jpg")
 		repVali = true
 
 	} else { // no existe el directorio
@@ -831,7 +831,7 @@ func generaReporte(f_name bool, f_id bool, f_path bool, _name string, _id string
 
 		fmt.Println("Segunda Grafica en ruta: ", nombref)
 		fmt.Println("Se enviara lo de base 64...")
-		convert64F(nombref)
+		convert64F("reporte"+auxdot+".jpg")
 		repVali = true
 	}
 }
@@ -981,7 +981,7 @@ func generarTree(f_name bool, f_id bool, f_path bool, _name string, _id string, 
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F(nombref)
+			convert64F("reporte"+auxdot+".jpg")
 			repVali = true
 
 		} else { // no existe el directorio
@@ -1020,7 +1020,7 @@ func generarTree(f_name bool, f_id bool, f_path bool, _name string, _id string, 
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F(nombref)
+			convert64F("reporte"+auxdot+".jpg")
 			repVali = true
 		}
 	} else {
@@ -1177,7 +1177,7 @@ func generarSB(f_name bool, f_id bool, f_path bool, _name string, _id string, _p
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F(nombref)
+			convert64F("reporte"+auxdot+".jpg")
 			repVali = true
 
 		} else { // no existe el directorio
@@ -1207,8 +1207,7 @@ func generarSB(f_name bool, f_id bool, f_path bool, _name string, _id string, _p
 			ioutil.WriteFile(_path, cmd, os.FileMode(mode))
 
 			//////para la imagen de reporte
-			nombref := ""
-			nombref = "reporte" + string(auxdot) + ".jpg"
+			nombref := "reporte" + string(auxdot) + ".jpg"
 			com2, _ := exec.LookPath("dot")
 			cmd2, _ := exec.Command(com2, "-Tjpg", "reporte"+auxdot+".dot").Output()
 			mode2 := int(0777)
@@ -1216,7 +1215,7 @@ func generarSB(f_name bool, f_id bool, f_path bool, _name string, _id string, _p
 
 			fmt.Println("Segunda Grafica en ruta: ", nombref)
 			fmt.Println("Se enviara lo de base 64...")
-			convert64F(nombref)
+			convert64F("reporte"+auxdot+".jpg")
 			repVali = true
 		}
 	} else {
@@ -1267,7 +1266,7 @@ func formateoEXT(_id string) bool {
 func convert64F(rutaImage string) {
 	imgFile, err := os.Open(rutaImage) // a QR code image
 
-	fmt.Println("hola aaaaaaaaaa: ")
+	fmt.Println("hola aaaaaaaaaa: ", rutaImage)
 	if err != nil {
 		fmt.Println("soi un error")
 		fmt.Println(err)
