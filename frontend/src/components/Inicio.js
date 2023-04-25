@@ -5,6 +5,7 @@ const Inicio = () => {
   const [fileContent, setFileContent] = useState("");
   const [salida, setSalida] = useState("");
   const [logeado, setLogeado] = useState("");
+  const host = "52.14.255.35";
 
   useEffect(() => {
     console.log("login: ", window.login);
@@ -28,7 +29,8 @@ const Inicio = () => {
 
   const analizador = (event) => {
     event.preventDefault();
-    const url = `http://localhost:5000/comandos`;
+    console.log("hola")
+    const url = `http://${host}:80/comandos`;
     const data = { exp: fileContent };
     fetch(url, {
       method: "POST", // or 'PUT'

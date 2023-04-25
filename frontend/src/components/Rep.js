@@ -6,6 +6,7 @@ const Rep = () => {
   const [salida, setSalida] = useState("");
   const [logeado, setLogeado] = useState("");
   const [imagen, setImagen] = useState("");
+  const host = "52.14.255.35";
 
   useEffect(() => {
     console.log("login: ", window.login);
@@ -29,7 +30,7 @@ const Rep = () => {
 
   const analizador = (event) => {
     event.preventDefault();
-    const url = `http://localhost:5000/reportes`;
+    const url = `http://${host}:80/reportes`;
     const data = { exp: fileContent };
     fetch(url, {
       method: "POST", // or 'PUT'

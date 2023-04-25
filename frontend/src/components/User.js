@@ -10,6 +10,7 @@ const Inicio = () => {
   const [pwd, setPwd] = useState("");
   const [salida, setSalida] = useState("");
   const [logeado, setLogeado] = useState("");
+  const host = "52.14.255.35";
 
   useEffect(() => {
     console.log("login: ", window.login);
@@ -23,7 +24,7 @@ const Inicio = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const url = "http://localhost:5000/login";
+    const url = `http://${host}:80/login`;
     const data = { usuario: user, clave: pwd, id: idPart };
     console.log(data);
     fetch(url, {
