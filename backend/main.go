@@ -65,7 +65,7 @@ func AnalisisCadena(w http.ResponseWriter, r *http.Request) {
 
 	var respuesta DatoRe
 	fmt.Println("Informacion: ", nweT.Exp)
-	AnalisisContenido(nweT.Exp)
+	AnalisisContenido(nweT.Exp, canal)
 	//Aqui mando una respuesta al front
 	respuesta.Validate = true
 	respuesta.Contenido = cadenaf
@@ -86,7 +86,7 @@ func analissisRepb64(w http.ResponseWriter, r *http.Request) {
 	var respuesta DatoRepIMG
 
 	fmt.Println("Informacion: ", nweT.Exp)
-	AnalisisContenido(nweT.Exp)
+	AnalisisContenido(nweT.Exp, canal)
 	//Aqui mando una respuesta al front
 	respuesta.Validate = repVali
 	respuesta.Contenido = cadenaf
