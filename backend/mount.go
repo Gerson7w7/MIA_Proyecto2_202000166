@@ -1266,7 +1266,7 @@ func formateoEXT(_id string) bool {
 func convert64F(rutaImage string) {
 	imgFile, err := os.Open(rutaImage) // a QR code image
 
-	fmt.Println("hola aaaaaaaaaa: ", rutaImage)
+	fmt.Println("hola aaaaaaaaaa:", rutaImage)
 	if err != nil {
 		fmt.Println("soi un error")
 		fmt.Println(err)
@@ -1278,8 +1278,8 @@ func convert64F(rutaImage string) {
 	fmt.Println("stat: ", fInfo)
 	var size int64 = fInfo.Size()
 	fmt.Println("size: ", size)
-	fmt.Println("stat: ", fInfo.Size())
-	buf := make([]byte, fInfo.Size())
+	fmt.Println("size: ", imgFile.Stat().fInfo.Size())
+	buf := make([]byte, imgFile.Stat().fInfo.Size())
 
 	// leer el contenido del archivo en el búfer
 	fReader := bufio.NewReader(imgFile)
